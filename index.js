@@ -1,9 +1,11 @@
 import flash from 'connect-flash';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express from 'express';
 import { create } from 'express-handlebars';
 import session from 'express-session';
 import mongoose from 'mongoose';
+import varMiddleware from './middleware/var.js';
 // Routes
 import AuthRoutes from './routes/auth.js';
 import ProductRoutes from './routes/products.js';
@@ -23,6 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({ secret: 'Nosirbek', resave: false, saveUninitialized: false }));
 app.use(flash());
+app.use(cookieParser());
+app.use(varMiddleware);
 
 app.use(AuthRoutes);
 app.use(ProductRoutes);
