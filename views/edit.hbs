@@ -1,0 +1,59 @@
+<div class='w-75 mx-auto'>
+	<p class='fs-1'>Edit Product</p>
+	{{#if errorEditProduct}}
+		<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+			<strong>Error!</strong>
+			{{errorEditProduct}}
+			<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+		</div>
+	{{/if}}
+	<form action='/edit/{{product._id}}' method='post'>
+		<div class='form-floating mb-3'>
+			<input
+				type='text'
+				class='form-control'
+				name='title'
+				id='floatingInput'
+				value='{{product.title}}'
+				placeholder='Title'
+			/>
+			<label for='floatingInput'>Title</label>
+		</div>
+		<div class='form-floating mb-3'>
+			<textarea
+				class='form-control'
+				placeholder='Description'
+				name='description'
+				id='floatingTextarea2'
+				style='height: 100px'
+			>{{product.description}}</textarea>
+			<label for='floatingTextarea2'>Description</label>
+		</div>
+		<div class='form-floating mb-3'>
+			<input
+				type='text'
+				class='form-control'
+				value='{{product.image}}'
+				name='image'
+				id='floatingInput'
+				placeholder='Image'
+			/>
+			<label for='floatingInput'>Image</label>
+		</div>
+		<div class='input-group mb-3'>
+			<span class='input-group-text'>$</span>
+			<div class='form-floating'>
+				<input
+					type='number'
+					class='form-control'
+					id='floatingInputGroup1'
+					name='price'
+					value='{{product.price}}'
+					placeholder='Price'
+				/>
+				<label for='floatingInputGroup1'>Price</label>
+			</div>
+		</div>
+		<button type='submit' class='btn btn-primary mt-3'>Edit Product</button>
+	</form>
+</div>

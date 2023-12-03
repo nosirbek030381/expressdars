@@ -5,16 +5,19 @@ import express from 'express';
 import { create } from 'express-handlebars';
 import session from 'express-session';
 import mongoose from 'mongoose';
+// Middleware
+import userMiddleware from './middleware/user.js';
 import varMiddleware from './middleware/var.js';
 // Routes
 import AuthRoutes from './routes/auth.js';
 import ProductRoutes from './routes/products.js';
+import hbsHelper from './utils/index.js';
 
 dotenv.config();
 
 const app = express();
 
-const hbs = create({ defaultLayout: 'main', extname: 'hbs' });
+const hbs = create({ defaultLayout: 'main', extname: 'hbs', helpers: hbsHelper });
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
@@ -27,6 +30,7 @@ app.use(session({ secret: 'Nosirbek', resave: false, saveUninitialized: false })
 app.use(flash());
 app.use(cookieParser());
 app.use(varMiddleware);
+app.use(userMiddleware);
 
 app.use(AuthRoutes);
 app.use(ProductRoutes);
